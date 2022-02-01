@@ -1,5 +1,7 @@
 # Leighton Coutinho Student ID:261016919
 import random
+import requests
+import json
 
 
 def get_grams(text, k):
@@ -171,4 +173,20 @@ def generate_text(grams, start_gram, k, n):
 
     return text
 
+def get_lyrics(artist,song_title):
+    url = "https://api.lyrics.ovh/v1/" + artist + '/' + song_title
+
+    # fetch lyrics
+    response = requests.get(url)
+    json_data = json.loads(response.content)
+    lyrics = json_data['lyrics']
+    return lyrics
+
+def store_lyrics(lyrics, fname):
+    # open text file
+    text_file = open(fname, "w")
+    # write string to file
+    text_file.write(lyrics)
+    # close file
+    text_file.close()
 
