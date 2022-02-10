@@ -173,14 +173,33 @@ def generate_text(grams, start_gram, k, n):
 
     return text
 
+def get_first_word(filename):
+    lines = []
+    with open(filename) as f:
+        lines = f.readlines()
+
+    count = 0
+    for line in lines:
+        count += 1
+        if count < 5:
+            continue
+        mywords = line.split()
+        for word in mywords:
+            if len(word) == 4:
+                return word
+
+
+
 def get_lyrics(artist,song_title):
     url = "https://api.lyrics.ovh/v1/" + artist + '/' + song_title
 
     # fetch lyrics
     response = requests.get(url)
-    json_data = json.loads(response.content)
+    json_data = json.loads(response.content.decode("utf-8"))
     lyrics = json_data['lyrics']
     return lyrics
+
+
 
 def store_lyrics(lyrics, fname):
     # open text file
