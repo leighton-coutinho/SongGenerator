@@ -3,7 +3,8 @@ import random
 import utils
 import requests
 import json
-#print(utils.get_lyrics("Brent Faiyaz","Clouded"))
+
+
 print("Welcome to lyric generator! \n First we must train our generator")
 print("In order to do this we need some songs with similar lyrics")
 count = 0
@@ -23,14 +24,8 @@ while myinput != "y":
     print("\n ********************************************************************")
 
 mygrams = utils.get_grams_from_files(filelist, 4)
-myword = utils.get_first_word(filelist[0])
+myline = utils.get_my_line(filelist[0])
 print("Now printing your song: \n ***************************************************************")
-print(utils.generate_text(mygrams, myword, 4, 1350))
+print(utils.generate_text(mygrams, myline, 4, 1350))
 
 
-'''utils.store_lyrics(utils.get_lyrics("Brent Faiyaz", "stay down"), "brent.txt")
-utils.store_lyrics(utils.get_lyrics("Brent Faiyaz", "Let me Know"), "brent2.txt")
-songgram = utils.get_grams_from_files(["brent.txt","brent2.txt"], 4)
-#print(songgram)
-print(utils.generate_text(songgram, 'when', 4, 1250))
-'''

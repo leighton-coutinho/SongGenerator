@@ -110,6 +110,11 @@ def get_grams_from_files(filenames, k):
         gramslist.pop(0)
         gramslist.insert(0, combinedlist)
 
+#going to try writing function for just text rather than using files
+
+#def get_grams_from_text(text):
+
+
 
 def generate_next_char(grams, cur_gram):
     ''' (dict,str) --> list,list
@@ -173,7 +178,7 @@ def generate_text(grams, start_gram, k, n):
 
     return text
 
-def get_first_word(filename):
+def get_my_line(filename):
     lines = []
     with open(filename) as f:
         lines = f.readlines()
@@ -181,12 +186,14 @@ def get_first_word(filename):
     count = 0
     for line in lines:
         count += 1
-        if count < 5:
+        if count < 6:
             continue
-        mywords = line.split()
-        for word in mywords:
-            if len(word) == 4:
-                return word
+        if line == '\n':
+            continue
+        return line
+        #for word in mywords:
+         #   if len(word) == 4:
+         #       return word
 
 
 
@@ -195,7 +202,7 @@ def get_lyrics(artist,song_title):
 
     # fetch lyrics
     response = requests.get(url)
-    json_data = json.loads(response.content.decode("utf-8"))
+    json_data = json.loads(response.content)
     lyrics = json_data['lyrics']
     return lyrics
 
